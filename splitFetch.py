@@ -7,6 +7,7 @@ import sys
 
 from pprint import pprint
 
+mongoimport = "./../mongodb/bin/mongoimport"
 def remove_key(obj):
     for key in obj.keys():
         new_key = key.replace('key','_id')
@@ -22,4 +23,4 @@ for index in range(len(data['issues'])):
 	DataFile = open("splitDumps/"+sys.argv[1]+"/"+str(index)+".json", "w")
 	DataFile.write(json.dumps(data['issues'][index]))
 	DataFile.close()
-	os.system("./../mongodb/bin/mongoimport -d mydb -c bugs --file splitDumps/"+sys.argv[1]+"/"+str(index)+".json")
+	os.system(mongoimport + " -d mydb -c bugs --file splitDumps/"+sys.argv[1]+"/"+str(index)+".json")
